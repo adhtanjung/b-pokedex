@@ -1,0 +1,70 @@
+$shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
+$transparent: rgba(255, 255, 255, 0.2);
+.mainContainer {
+	max-width: 480px;
+
+	.pokeContainer {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+.cardPoke {
+	position: relative;
+	overflow: hidden;
+	height: 110px;
+	margin: 10px;
+	padding: 16px;
+	border-radius: 12px;
+	box-shadow: $shadow;
+	display: flex;
+	justify-content: space-between;
+	width: 40%;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+
+	.leftCard {
+		display: flex;
+		flex-direction: column;
+	}
+	.typesName {
+		display: flex;
+		box-shadow: $shadow;
+		align-items: center;
+		justify-content: center;
+		border-radius: 19px;
+		background-color: $transparent;
+		font-size: 13px;
+		font-weight: 500;
+		color: rgb(167, 167, 167);
+		padding: 5px 10px;
+	}
+}
+
+.image {
+	@media only screen and(max-device-width:736px) {
+		max-width: 72px;
+		max-height: 72px;
+	}
+	@media only screen and(max-device-width:640px) {
+		max-width: 68px;
+		max-height: 68px;
+	}
+	@media only screen and(min-device-width: 1200px) {
+		width: 80px;
+		height: 80px;
+	}
+}
+.text {
+	color: white;
+	font-weight: 500;
+}
+
+.goBackButton {
+	display: flex;
+	width: 40px;
+	height: 40px;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
