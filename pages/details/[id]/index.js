@@ -8,6 +8,7 @@ import About from "../../../components/About";
 import BaseStats from "../../../components/BaseStats";
 import Header from "../../../components/Header";
 import { useRouter } from "next/router";
+import Meta from "../../../components/Meta";
 
 const colors = {
 	fire: "#FB6C69",
@@ -54,54 +55,58 @@ function Details({ details, species }) {
 			return <BaseStats stats={details.stats} />;
 		}
 	};
+	console.log(species);
 	return (
-		<div
-			style={{ display: "flex", flexDirection: "column" }}
-			className={styles.container}
-		>
+		<>
+			<Meta title={details.name} keywords={details.name} />
 			<div
-				className={styles.pokeCard}
-				style={{ backgroundColor: colors[details.types[0].type.name] }}
+				style={{ display: "flex", flexDirection: "column" }}
+				className={styles.container}
 			>
-				<Header pokemon={details} id={details.id} />
-				<div className={styles.pokemonName}>
-					{details.name.charAt(0).toUpperCase() + details.name.slice(1)}
+				<div
+					className={styles.pokeCard}
+					style={{ backgroundColor: colors[details.types[0].type.name] }}
+				>
+					<Header pokemon={details} id={details.id} />
+					<div className={styles.pokemonName}>
+						{details.name.charAt(0).toUpperCase() + details.name.slice(1)}
+					</div>
+					<div className={styles.underHeader}>
+						<div className={styles.typesContainer}>
+							{details.types.map((x) => (
+								<div className={styles.typeName} key={x.type.url}>
+									{x.type.name.charAt(0).toUpperCase() + x.type.name.slice(1)}
+								</div>
+							))}
+						</div>
+						<span>#{details.id}</span>
+					</div>
 				</div>
-				<div className={styles.underHeader}>
-					<div className={styles.typesContainer}>
-						{details.types.map((x) => (
-							<div className={styles.typeName} key={x.type.url}>
-								{x.type.name.charAt(0).toUpperCase() + x.type.name.slice(1)}
-							</div>
+				<div className={styles.bottomCard}>
+					<img
+						src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${details.id}.svg`}
+						className={styles.cardImagePokemon}
+					/>{" "}
+					<div className={styles.bottomHeader}>
+						{header.map((val, i) => (
+							<span
+								key={i}
+								className={
+									selected == val
+										? styles.headerDetailSelected
+										: styles.headerDetail
+								}
+								onClick={() => setSelected(val)}
+							>
+								{val}
+							</span>
 						))}
 					</div>
-					<span>#{details.id}</span>
+					{handleRenderDetails(selected)}
+					{/* {innerDetails()} */}
 				</div>
 			</div>
-			<div className={styles.bottomCard}>
-				<img
-					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${details.id}.svg`}
-					className={styles.cardImagePokemon}
-				/>{" "}
-				<div className={styles.bottomHeader}>
-					{header.map((val, i) => (
-						<span
-							key={i}
-							className={
-								selected == val
-									? styles.headerDetailSelected
-									: styles.headerDetail
-							}
-							onClick={() => setSelected(val)}
-						>
-							{val}
-						</span>
-					))}
-				</div>
-				{handleRenderDetails(selected)}
-				{/* {innerDetails()} */}
-			</div>
-		</div>
+		</>
 	);
 }
 

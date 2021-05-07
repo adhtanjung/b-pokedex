@@ -3,12 +3,14 @@ import Link from "next/link";
 import { server } from "../config";
 import { useRouter } from "next/router";
 import styles from "../styles/Home.module.scss";
+import Meta from "../components/Meta";
 export default function Home({ pokeList: { results } }) {
 	const router = useRouter();
 	const { page } = router.query;
 
 	return (
 		<>
+			<Meta />
 			<h1>Pokemon List</h1>
 			<Link href="/pokedex">
 				<label className={styles.goToList}>My Pokemon List</label>
