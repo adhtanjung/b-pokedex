@@ -110,7 +110,32 @@ function Details({ details, species }) {
 	);
 }
 
-export const getStaticProps = async (context) => {
+// export const getStaticProps = async (context) => {
+// 	const res = await axios.get(`${server}pokemon/${context.params.id}`);
+// 	const resSpecies = await axios.get(
+// 		`${server}pokemon-species/${context.params.id}`
+// 	);
+// 	return {
+// 		props: {
+// 			details: res.data,
+// 			species: resSpecies.data,
+// 		},
+// 	};
+// };
+
+// export const getStaticPaths = async () => {
+// 	const res = await axios.get(`${server}pokemon?limit=1118`);
+// 	const ids = res.data.results.map((details) => details.url);
+// 	const paths = ids.map((id) => ({
+// 		params: { id: id.split("/")[6] },
+// 	}));
+// 	return {
+// 		paths,
+// 		fallback: false,
+// 	};
+// };
+
+export async function getServerSideProps(context) {
 	const res = await axios.get(`${server}pokemon/${context.params.id}`);
 	const resSpecies = await axios.get(
 		`${server}pokemon-species/${context.params.id}`
@@ -121,18 +146,6 @@ export const getStaticProps = async (context) => {
 			species: resSpecies.data,
 		},
 	};
-};
-
-export const getStaticPaths = async () => {
-	const res = await axios.get(`${server}pokemon?limit=1118`);
-	const ids = res.data.results.map((details) => details.url);
-	const paths = ids.map((id) => ({
-		params: { id: id.split("/")[6] },
-	}));
-	return {
-		paths,
-		fallback: true,
-	};
-};
+}
 
 export default Details;
